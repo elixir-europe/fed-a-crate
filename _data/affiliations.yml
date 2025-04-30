@@ -10,3 +10,9 @@
   expose: true
   type: institution
   url: https://esciencelab.org.uk/
+- name: The University of Nottingham
+  image_url: /images/institutions/Nottingham_Blue_single_colour_logo_SCREEN.png
+  pid: https://ror.org/01ee9ar58
+  expose: true
+  type: institution
+  url: http://www.nottingham.ac.uk/

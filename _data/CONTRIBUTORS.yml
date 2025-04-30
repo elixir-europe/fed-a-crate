@@ -34,4 +34,15 @@ Alexander Hambley:
     orcid: 0000-0003-1193-6632
     role: Five Safes RO-Crate
     affiliation: The University of Manchester / ELIXIR-UK
-
+Tim Beck:
+    git: tb143
+    email: tim.beck@nottingham.ac.uk
+    orcid: 0000-0002-0292-7972
+    role: TRE deployment
+    affiliation: The University of Nottingham / ELIXIR-UK
+James Mitchell-White:
+    git: kuraisle
+    email: james.mitchell-white1@nottingham.ac.uk
+    orcid: 0000-0003-2818-8538
+    role: TRE deployment
+    affiliation: The University of Nottingham / ELIXIR-UK
