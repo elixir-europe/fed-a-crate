@@ -37,9 +37,6 @@ x-app-image: &app-image
       COPY --chown=app:app pyproject.toml .
       COPY --chown=app:app prs_fed/ ./prs_fed/
       RUN python -m pip install -U --no-cache-dir .
-      # Install the bundled flwrCrate module (server-side RO-Crate capture).
-      # It lives at prs_fed/flwrcrate with its own packaging metadata.
-      RUN python -m pip install --no-cache-dir ./prs_fed/flwrCrate
       # Pre-create /results owned by the `app` user so the ServerApp can write
       # there even when the host bind-mount directory is owned by another UID.
       USER root

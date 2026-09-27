@@ -9,6 +9,7 @@ description = "Federated PRS case/control prediction across 3 nodes (Flower Mess
 license     = "Apache-2.0"
 dependencies = [
     "flwr>=1.29.0",
+    "flwrcrate>=0.4.0",
     "numpy>=1.26",
     "pandas>=2.0",
     "rocrate>=0.15.0",

@@ -37,15 +37,7 @@ from flwr.serverapp          import Grid, ServerApp
 from prs_fed.strategy        import HistoryFedAvg
 from prs_fed.model_io        import save_final_artifacts
 from prs_fed.crate_merge     import merge_node_crates_into_run_crate
-
-# Provenance capture is an optional dependency. When the ``flwrcrate`` package
-# is available, the run emits an RO-Crate describing the federation; when it is
-# not, the federation runs normally and crate emission is skipped.
-try:
-    from flwrcrate import FLCrateTracker
-    _HAVE_FLWRCRATE = True
-except ImportError:
-    _HAVE_FLWRCRATE = False
+from flwrcrate import FLCrateTracker  # type: ignore[import]
 
 
 app = ServerApp()
@@ -129,52 +121,19 @@ def main(grid: Grid, context: Context) -> None:
     # aggregates rather than wrapping a server-side evaluation function.
     crate_out = os.path.join(results_dir, "fl_crate")
 
-    if _HAVE_FLWRCRATE:
-        pyproject_path = _resolve_pyproject_path()
-        if pyproject_path is None:
-            print("  [flwrcrate] WARNING: could not locate pyproject.toml; "
-                  "framework/dependency capture will be limited.")
+    pyproject_path = _resolve_pyproject_path()
+    if pyproject_path is None:
+        print("  [flwrcrate] WARNING: could not locate pyproject.toml; "
+                "framework/dependency capture will be limited.")
 
-        with FLCrateTracker(
-            context, strategy,
-            output_dir     = crate_out,                       # absolute path under results_dir
-            pyproject_path = pyproject_path or "pyproject.toml",
-            app_name       = "Federated PRS case/control classification across 3 nodes",
-            author         = _build_author(cfg),
-            license        = "https://spdx.org/licenses/MIT.html",
-        ) as tracker:
-            result = strategy.start(
-                grid            = grid,
-                initial_arrays  = initial_arrays,
-                num_rounds      = num_rounds,
-                train_config    = train_config,
-                evaluate_config = evaluate_config,
-            )
-            # Records per-round metrics from the Result's client-side aggregates.
-            tracker.record_result(result)
-        print(f"  [flwrcrate] RO-Crate written to {crate_out}/ro-crate/")
-
-        # ── Merge per-node provenance into the run-crate ──────────────────────
-        # Fold each node's RO-Crate (institute and location) into the run-crate
-        # as contributor organisations on the run action, producing a single
-        # self-contained provenance record.
-        run_crate_path = os.path.join(crate_out, "ro-crate", "ro-crate-metadata.json")
-        merge_status = merge_node_crates_into_run_crate(
-            run_crate_path = run_crate_path,
-            node_provenance = strategy._provenance,
-        )
-        if merge_status["written"]:
-            merged = [t["cohort"] for t in merge_status["merged_nodes"]]
-            print(f"  [provenance] Merged node crates into run-crate: {merged}")
-        if merge_status["skipped_nodes"]:
-            skipped = [(t["cohort"], t["reason"]) for t in merge_status["skipped_nodes"]]
-            print(f"  [provenance] Skipped: {skipped}")
-        for w in merge_status["warnings"]:
-            print(f"  [provenance] WARNING: {w}")
-    else:
-        print("  [flwrcrate] package not installed; skipping RO-Crate emission.")
-        print("  [provenance] No provenance crate will be written. Install the "
-              "flwrcrate package to enable provenance capture.")
+    with FLCrateTracker(
+        context, strategy,
+        output_dir     = crate_out,                       # absolute path under results_dir
+        pyproject_path = pyproject_path or "pyproject.toml",
+        app_name       = "Federated PRS case/control classification across 3 nodes",
+        author         = _build_author(cfg),
+        license        = "https://github.com/elixir-europe/fed-a-crate?tab=MIT-1-ov-file",
+    ) as tracker:
         result = strategy.start(
             grid            = grid,
             initial_arrays  = initial_arrays,
@@ -182,6 +141,27 @@ def main(grid: Grid, context: Context) -> None:
             train_config    = train_config,
             evaluate_config = evaluate_config,
         )
+        # Records per-round metrics from the Result's client-side aggregates.
+        tracker.record_result(result)
+    print(f"  [flwrcrate] RO-Crate written to {crate_out}/ro-crate/")
+
+    # ── Merge per-node provenance into the run-crate ──────────────────────
+    # Fold each node's RO-Crate (institute and location) into the run-crate
+    # as contributor organisations on the run action, producing a single
+    # self-contained provenance record.
+    run_crate_path = os.path.join(crate_out, "ro-crate", "ro-crate-metadata.json")
+    merge_status = merge_node_crates_into_run_crate(
+        run_crate_path = run_crate_path,
+        node_provenance = strategy._provenance,
+    )
+    if merge_status["written"]:
+        merged = [t["cohort"] for t in merge_status["merged_nodes"]]
+        print(f"  [provenance] Merged node crates into run-crate: {merged}")
+    if merge_status["skipped_nodes"]:
+        skipped = [(t["cohort"], t["reason"]) for t in merge_status["skipped_nodes"]]
+        print(f"  [provenance] Skipped: {skipped}")
+    for w in merge_status["warnings"]:
+        print(f"  [provenance] WARNING: {w}")
 
     # ── Persist artefacts ─────────────────────────────────────────────────────
     # result.arrays holds the final aggregated parameters from the last round.

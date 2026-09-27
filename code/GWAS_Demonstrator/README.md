@@ -140,7 +140,11 @@ different model.
 
 ```bash
 # 1. Register the SuperLink connection with the Flower CLI (once per machine)
-./scripts/setup_federation.sh
+./setup_federation.sh
+
+# 2. Create the results folder with the required user permissions for flower containers
+# The command to revert the permissions is also in this file, in case you have any difficulties deleting it afterwards.
+./setup_results.sh 
 
 # 2. Start the federation platform (stays running; serves many jobs)
 docker compose up --build -d
