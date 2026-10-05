@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SynthGWAS — Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+
+<div id="loadingScreen" class="hidden">
+    <div id="progressContainer">
+        <div id="progressBar"><div id="progressFill"></div></div>
+    </div>
+    <div id="progressSpinner" class="loader">
+        <div class="loader" role="status" aria-label="Loading">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+    <div id="loadingText">Downloading Cohort...</div>
+</div>
+
+<body class="results-body">
+    <header class="header">
+    <nav class="main-nav">
+      <div class="logo">
+        <i class="fas fa-dna"></i>
+        <a href="tutorial.html" class="logo-title">SynthGWAS</a>
+      </div>
+      <ul class="nav-links">
+          <li><a href="index.html">Cohort Generation</a></li>
+          <li><a href="results.html" class="active">Results</a></li>
+          <li><a href="tutorial.html">Tutorial</a></li>
+      </ul>
+    </nav>
+  </header>
+
+    <div id="results" class="results">
+        <div class="charts fade">
+          <div class="chart-slide">
+            <h2>Observed vs. Predicted Incidence Rates</h2>
+            <canvas id="expectedIncidenceChartProspective"></canvas>
+          </div>
+        </div>
+        <div class="charts fade">
+          <div class="chart-slide">
+            <h2>Kaplan-Meier Curve</h2>
+            <div id="kaplanMeierCurve" class="kaplan-meier-container"></div>
+          </div>
+        </div>
+        <div id="tooltip" style="position: absolute; opacity: 0; pointer-events: none; background: white; border: 1px solid #ccc; padding: 8px; border-radius: 4px; font-size: 14px;"></div>
+        <a class="prev" id="prevSlide">&#10094;</a>
+        <a class="next" id="nextSlide">&#10095;</a>
+    </div>
+
+    <footer class="site-footer">
+    <div class="btn-group" id="downloadZone">
+      <button id="downloadProspective" class="button">
+        <i class="fas fa-download"></i> Export All Profiles As CSV
+      </button>
+      <button id="downloadProspectiveVCF" class="button">
+        <i class="fas fa-download"></i> Export All Profiles As VCF
+      </button>
+    </div>
+  </footer>
+</body>
+
+<script type="module" src="pages/results.js" defer></script>
+</html>

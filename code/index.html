@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SynthGWAS — Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<div id="loadingScreen" class="hidden">
+  <div id="progressContainer">
+    <div id="progressBar"><div id="progressFill"></div></div>
+  </div>
+  <div id="progressSpinner" class="loader">
+    <div class="loader" role="status" aria-label="Loading">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div id="loadingText">Loading...</div>
+</div>
+
+<body class="generation-body">
+    <header class="header">
+  <nav class="main-nav">
+    <div class="logo">
+      <i class="fas fa-dna"></i>
+      <a href="tutorial.html" class="logo-title">SynthGWAS</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Cohort Generation</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="tutorial.html">Tutorial</a></li>
+    </ul>
+  </nav>
+  </header>
+
+    <div class="left">
+      <fieldset class="form">
+        <legend>Population-specific parameters</legend>
+
+        <div class="input-group">
+          <div class="alert hidden" id="alert-country">Please select a country.</div>
+          <label for="countrySelect">Country:</label>
+          <select id="countrySelect">
+            <option value="" disabled selected hidden>Loading Countries...</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="sexSelect">Sex:</label>
+          <select id="sexSelect">
+            <option value="" disabled selected hidden>Loading Sexes...</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <div class="alert hidden" id="alert-age-range">Please enter a valid age range.</div>
+          <label for="age-range">Age of Entry Range (years):</label>
+          <div id="age-range">
+            <input type="number" id="minAge" placeholder="Min Age" value="30">
+            <span>to</span>
+            <input type="number" id="maxAge" placeholder="Max Age" value="80">
+          </div>
+        </div>
+      </fieldset>
+</div>
+    <div class="right">
+      <fieldset class="form">
+        <legend>Cohort-specific parameters</legend>
+
+        <div class="input-group">
+          <div class="alert hidden" id="alert-disease">Please select a disease.</div>
+          <label for="diseaseSelect">Disease:</label>
+          <select id="diseaseSelect">
+            <option value="" disabled selected hidden>Loading Diseases...</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <div class="alert hidden" id="alert-profiles">Please enter a valid number of profiles.</div>
+          <label for="numberOfProfiles">Total Number of Profiles:</label>
+          <input type="number" id="numberOfProfiles" value="1000" min="100" max="10000">
+        </div>
+
+        <div class="input-group">
+          <div class="alert hidden" id="alert-age-follow">Please enter a valid follow-up range.</div>
+          <label for="minFollowUp">Follow-Up Period (years):</label>
+          <div class="followUp-range">
+            <input type="number" id="minFollowUp" placeholder="Min Follow Up" value="15" min="1" max="50">
+            <span>to</span>
+            <input type="number" id="maxFollowUp" placeholder="Max Follow Up" value="30" min="1" max="50">
+          </div>
+        </div>
+
+        <div class="input-group input-group--checkbox">
+          <label for="retrospectiveToggle">Create Retrospective Cohort?</label>
+          <input type="checkbox" id="retrospectiveToggle">
+        </div>
+
+        <div class="input-group" id="retrospectiveZone" hidden>
+          <label for="retrospectiveInput">Number of Controls per Case:</label>
+          <input type="number" id="retrospectiveInput" placeholder="1" min="1" value="1">
+        </div>
+      </fieldset>
+    </div>
+
+    <footer class="site-footer">
+    <div class="btn-group" id="generateZone">
+      <button id="generate" class="button">
+        <i class="fas fa-play"></i> Generate Cohort
+      </button>
+    </div>
+  </footer>
+</body>
+<script type="module" src="pages/generator.js" defer></script>
+</html>

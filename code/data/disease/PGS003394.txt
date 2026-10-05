@@ -1,0 +1,56 @@
+###PGS CATALOG SCORING FILE - see https://www.pgscatalog.org/downloads/#dl_ftp_scoring for additional information
+#format_version=2.0
+##POLYGENIC SCORE (PGS) INFORMATION
+#pgs_id=PGS003394
+#pgs_name=PRS_Stepwise
+#trait_reported=Epithelial ovarian cancer
+#trait_mapped=ovarian carcinoma
+#trait_efo=EFO_0001075
+#genome_build=GRCh37
+#variants_number=36
+#weight_type=beta
+##SOURCE INFORMATION
+#pgp_id=PGP000277
+#citation=Dareng EO et al. Eur J Hum Genet (2022). doi:10.1038/s41431-021-00987-7
+##HARMONIZATION DETAILS
+#HmPOS_build=GRCh38
+#HmPOS_date=2023-01-18
+#HmPOS_match_chr={"True": null, "False": null}
+#HmPOS_match_pos={"True": null, "False": null}
+chr_name	chr_position	effect_allele	other_allele	effect_weight	allelefrequency_effect	hm_source	hm_rsID	hm_chr	hm_pos	hm_inferOtherAllele
+1	22468215	T	C	0.0808	0.155486	liftover		1	22141722	
+1	38082122	A	G	0.0835	0.254292	liftover		1	37616450	
+2	111818658	C	A	0.0642	0.252134	liftover		2	111061081	
+2	111915946	T	G	-0.0118	0.186134	liftover		2	111158369	
+2	113973964	C	T	0.0518	0.464965	liftover		2	113216387	
+2	113979364	A	G	0.0323	0.149592	liftover		2	113221787	
+2	177037831	G	C	-0.1005	0.680296	liftover		2	176173103	
+3	156402487	T	C	0.3647	0.049452	liftover		3	156684698	
+3	190531882	A	G	-0.0668	0.303218	liftover		3	190814093	
+4	70577859	A	G	-0.0574	0.351856	liftover		4	69712141	
+5	1279790	T	C	0.0351	0.258965	liftover		5	1279675	
+5	1285974	A	C	0.059	0.330049	liftover		5	1285859	
+5	1287194	A	G	-0.0849	0.570409	liftover		5	1287079	
+5	1295349	G	A	-0.0797	0.306276	liftover		5	1295234	
+5	54476556	A	G	-0.0666	0.730798	liftover		5	55180728	
+8	82653644	G	A	0.1294	0.067824	liftover		8	81741409	
+8	128817883	G	A	0.076	0.456948	liftover		8	127805637	
+8	129069820	A	G	-0.0692	0.375132	liftover		8	128057574	
+8	129217984	C	G	0.0485	0.477535	liftover		8	128205738	
+8	129551633	A	G	-0.1759	0.130493	liftover		8	128539387	
+9	16914716	A	G	-0.1392	0.204783	liftover		9	16914718	
+9	16914835	C	A	-0.101	0.322426	liftover		9	16914837	
+9	19044489	A	G	0.0788	0.136561	liftover		9	19044491	
+9	106912892	A	G	0.0582	0.547349	liftover		9	104150611	
+9	136155000	T	C	0.0931	0.196517	liftover		9	133279427	
+10	21821274	A	G	0.0799	0.331184	liftover		10	21532345	
+10	112011084	G	A	0.0752	0.148067	liftover		10	110251326	
+12	121415293	A	G	-0.0593	0.579263	liftover		12	120977490	
+15	91535329	T	G	-0.0804	0.133133	liftover		15	90992099	
+17	36100767	G	A	-0.0582	0.602031	liftover		17	37740776	
+17	44790203	G	A	0.1026	0.201454	liftover		17	46712837	
+17	46472432	G	C	0.1182	0.272844	liftover		17	48395070	
+18	21425852	C	T	-0.0283	0.61887	liftover		18	23845888	
+19	17390291	C	T	0.0797	0.296534	liftover		19	17279482	
+19	17409380	T	C	-0.0613	0.51289	liftover		19	17298571	
+21	36080398	C	T	-0.0599	0.406715	liftover		21	34708100	
