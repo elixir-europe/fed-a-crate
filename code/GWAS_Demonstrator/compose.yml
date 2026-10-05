@@ -1,0 +1,166 @@
+# compose.yml
+# ─────────────────────────────────────────────────────────────────────────
+# Flower Message API deployment of the PRS federation.
+#
+# Architecture:
+#   superlink           — central coordinator (the "Flower control plane")
+#   serverapp           — runs the ServerApp code (orchestration + saving)
+#   supernode-1..3      — one long-running supervisor per node
+#   clientapp-1..3      — one ClientApp executor per node
+#                         (does the actual sklearn training)
+#
+# Each node is supernode-N + clientapp-N. They talk over a private channel
+# inside Docker; only the supernode connects out to the SuperLink.
+#
+# Usage:
+#   docker compose up --build -d         # start the platform
+#   flwr run . local-deployment --stream # submit a federation job
+#   docker compose down -v               # clean up
+#
+# CSVs are mounted into each clientapp container as read-only files under
+# their real names (USA_young.csv etc).
+# ─────────────────────────────────────────────────────────────────────────
+
+# YAML anchor: every container that runs project code (serverapp +
+# clientapp-1..3) uses the same image, built once below.
+x-app-image: &app-image
+  build:
+    context: .
+    dockerfile_inline: |
+      FROM flwr/superexec:1.29.0
+      USER root
+      RUN apt-get update \
+          && apt-get -y --no-install-recommends install build-essential \
+          && rm -rf /var/lib/apt/lists/*
+      USER app
+      WORKDIR /app
+      COPY --chown=app:app pyproject.toml .
+      COPY --chown=app:app prs_fed/ ./prs_fed/
+      RUN python -m pip install -U --no-cache-dir .
+      # Pre-create /results owned by the `app` user so the ServerApp can write
+      # there even when the host bind-mount directory is owned by another UID.
+      USER root
+      RUN mkdir -p /results && chown app:app /results
+      USER app
+      ENTRYPOINT ["flower-superexec"]
+
+
+services:
+  # ── Central coordinator (SuperLink) ─────────────────────────────────────
+  superlink:
+    image: flwr/superlink:1.29.0
+    command:
+      - --insecure
+      - --isolation
+      - process
+    ports:
+      # 9091 — fleet API (SuperNodes connect here)
+      # 9092 — exec API (serverapp connects here)
+      # 9093 — control API (where `flwr run` connects from the host)
+      - "9093:9093"
+
+  # ── ServerApp executor ───────────────────────────────────────────────────
+  # When `flwr run` submits a job, the SuperLink hands the ServerApp code
+  # to this container to execute. It then writes results to /results.
+  serverapp:
+    <<: *app-image
+    command:
+      - --insecure
+      - --plugin-type
+      - serverapp
+      - --appio-api-address
+      - superlink:9091
+    volumes:
+      - ./results:/results
+    depends_on:
+      - superlink
+
+  # ── node 1 (Young) ────────────────────────────────────────────────────────
+  supernode-1:
+    image: flwr/supernode:1.29.0
+    command:
+      - --insecure
+      - --superlink
+      - superlink:9092
+      - --clientappio-api-address
+      - 0.0.0.0:9094
+      - --isolation
+      - process
+      - --node-config
+      - "cohort-csv='/data/USA_young.csv' cohort-label='USA_young' node-num=1"
+    depends_on:
+      - superlink
+
+  clientapp-1:
+    <<: *app-image
+    command:
+      - --insecure
+      - --plugin-type
+      - clientapp
+      - --appio-api-address
+      - supernode-1:9094
+    volumes:
+      - ./data/USA_young.csv:/data/USA_young.csv:ro
+      - ./provenance/USA_young/ro-crate-metadata.json:/provenance/ro-crate-metadata.json:ro
+    depends_on:
+      - supernode-1
+
+  # ── node 2 (Old) ──────────────────────────────────────────────────────────
+  supernode-2:
+    image: flwr/supernode:1.29.0
+    command:
+      - --insecure
+      - --superlink
+      - superlink:9092
+      - --clientappio-api-address
+      - 0.0.0.0:9094
+      - --isolation
+      - process
+      - --node-config
+      - "cohort-csv='/data/USA_old.csv' cohort-label='USA_old' node-num=2"
+    depends_on:
+      - superlink
+
+  clientapp-2:
+    <<: *app-image
+    command:
+      - --insecure
+      - --plugin-type
+      - clientapp
+      - --appio-api-address
+      - supernode-2:9094
+    volumes:
+      - ./data/USA_old.csv:/data/USA_old.csv:ro
+      - ./provenance/USA_old/ro-crate-metadata.json:/provenance/ro-crate-metadata.json:ro
+    depends_on:
+      - supernode-2
+
+  # ── node 3 (Normal) ───────────────────────────────────────────────────────
+  supernode-3:
+    image: flwr/supernode:1.29.0
+    command:
+      - --insecure
+      - --superlink
+      - superlink:9092
+      - --clientappio-api-address
+      - 0.0.0.0:9094
+      - --isolation
+      - process
+      - --node-config
+      - "cohort-csv='/data/USA_normal.csv' cohort-label='USA_normal' node-num=3"
+    depends_on:
+      - superlink
+
+  clientapp-3:
+    <<: *app-image
+    command:
+      - --insecure
+      - --plugin-type
+      - clientapp
+      - --appio-api-address
+      - supernode-3:9094
+    volumes:
+      - ./data/USA_normal.csv:/data/USA_normal.csv:ro
+      - ./provenance/USA_normal/ro-crate-metadata.json:/provenance/ro-crate-metadata.json:ro
+    depends_on:
+      - supernode-3

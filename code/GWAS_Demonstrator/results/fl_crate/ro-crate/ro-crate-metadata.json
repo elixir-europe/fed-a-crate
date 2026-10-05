@@ -1,0 +1,477 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.2/context",
+  "@graph": [
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "author": {
+        "@id": "https://orcid.org/0000-0002-7912-4203"
+      },
+      "conformsTo": {
+        "@id": "https://esciencelab.org.uk/federated-learning-ro-crate-profile/federated-learning-profile.html"
+      },
+      "datePublished": "2026-08-10T18:47:20+00:00",
+      "description": "RO-Crate describing a federated learning run captured with flwrCrate.",
+      "hasPart": [
+        {
+          "@id": "metrics_log.json"
+        }
+      ],
+      "license": {
+        "@id": "https://spdx.org/licenses/MIT.html"
+      },
+      "mentions": [
+        {
+          "@id": "#fl-run"
+        }
+      ],
+      "name": "Federated PRS case/control classification across 3 nodes"
+    },
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      },
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.2"
+      }
+    },
+    {
+      "@id": "https://esciencelab.org.uk/federated-learning-ro-crate-profile/federated-learning-profile.html",
+      "@type": "CreativeWork",
+      "name": "Federated Learning RO-Crate profile v0.1"
+    },
+    {
+      "@id": "https://spdx.org/licenses/MIT.html",
+      "@type": "CreativeWork",
+      "name": "https://spdx.org/licenses/MIT.html"
+    },
+    {
+      "@id": "https://orcid.org/0000-0002-7912-4203",
+      "@type": "Person",
+      "affiliation": "University of Nottingham",
+      "name": "Thomas Rowlands"
+    },
+    {
+      "@id": "#flower",
+      "@type": "SoftwareApplication",
+      "name": "Flower",
+      "softwareVersion": "1.29.0",
+      "url": "https://flower.ai/"
+    },
+    {
+      "@id": "#framework-numpy",
+      "@type": "SoftwareApplication",
+      "name": "numpy",
+      "softwareRequirements": ">=1.26",
+      "softwareVersion": "2.4.4"
+    },
+    {
+      "@id": "#framework-pandas",
+      "@type": "SoftwareApplication",
+      "name": "pandas",
+      "softwareRequirements": ">=2.0",
+      "softwareVersion": "3.0.5"
+    },
+    {
+      "@id": "#framework-scikit-learn",
+      "@type": "SoftwareApplication",
+      "name": "scikit-learn",
+      "softwareRequirements": ">=1.3",
+      "softwareVersion": "1.9.0",
+      "url": "https://scikit-learn.org/"
+    },
+    {
+      "@id": "#framework-scipy",
+      "@type": "SoftwareApplication",
+      "name": "scipy",
+      "softwareRequirements": ">=1.11",
+      "softwareVersion": "1.18.0"
+    },
+    {
+      "@id": "#strategy-param-arrayrecord-key",
+      "@type": "PropertyValue",
+      "name": "arrayrecord_key",
+      "value": "arrays"
+    },
+    {
+      "@id": "#strategy-param-configrecord-key",
+      "@type": "PropertyValue",
+      "name": "configrecord_key",
+      "value": "config"
+    },
+    {
+      "@id": "#strategy-param-fraction-evaluate",
+      "@type": "PropertyValue",
+      "name": "fraction_evaluate",
+      "value": 1.0
+    },
+    {
+      "@id": "#strategy-param-fraction-train",
+      "@type": "PropertyValue",
+      "name": "fraction_train",
+      "value": 1.0
+    },
+    {
+      "@id": "#strategy-param-min-available-nodes",
+      "@type": "PropertyValue",
+      "name": "min_available_nodes",
+      "value": 3
+    },
+    {
+      "@id": "#strategy-param-min-evaluate-nodes",
+      "@type": "PropertyValue",
+      "name": "min_evaluate_nodes",
+      "value": 3
+    },
+    {
+      "@id": "#strategy-param-min-train-nodes",
+      "@type": "PropertyValue",
+      "name": "min_train_nodes",
+      "value": 3
+    },
+    {
+      "@id": "#strategy-param-weighted-by-key",
+      "@type": "PropertyValue",
+      "name": "weighted_by_key",
+      "value": "num-examples"
+    },
+    {
+      "@id": "#fl-strategy",
+      "@type": "SoftwareApplication",
+      "additionalProperty": [
+        {
+          "@id": "#strategy-param-arrayrecord-key"
+        },
+        {
+          "@id": "#strategy-param-configrecord-key"
+        },
+        {
+          "@id": "#strategy-param-fraction-evaluate"
+        },
+        {
+          "@id": "#strategy-param-fraction-train"
+        },
+        {
+          "@id": "#strategy-param-min-available-nodes"
+        },
+        {
+          "@id": "#strategy-param-min-evaluate-nodes"
+        },
+        {
+          "@id": "#strategy-param-min-train-nodes"
+        },
+        {
+          "@id": "#strategy-param-weighted-by-key"
+        }
+      ],
+      "description": "Federated aggregation strategy (prs_fed.strategy).",
+      "name": "HistoryFedAvg"
+    },
+    {
+      "@id": "metrics_log.json",
+      "@type": "File",
+      "description": "Per-round training and evaluation metrics, plus federation details (participant/supernode counts and configuration) for the whole run.",
+      "encodingFormat": "application/json",
+      "name": "Per-round metrics and federation log"
+    },
+    {
+      "@id": "#metric-train-auc",
+      "@type": "PropertyValue",
+      "name": "train-auc",
+      "propertyID": "http://edamontology.org/data_2125",
+      "value": 0.7459007377316473
+    },
+    {
+      "@id": "#metric-train-f1",
+      "@type": "PropertyValue",
+      "name": "train-f1",
+      "propertyID": "https://en.wikipedia.org/wiki/F-score",
+      "value": 0.4178875067909491
+    },
+    {
+      "@id": "#metric-train-acc",
+      "@type": "PropertyValue",
+      "name": "train-acc",
+      "propertyID": "https://schema.org/Accuracy",
+      "value": 0.6419722222222222
+    },
+    {
+      "@id": "#metric-test-auc",
+      "@type": "PropertyValue",
+      "name": "test-auc",
+      "propertyID": "http://edamontology.org/data_2125",
+      "value": 0.6258181073552811
+    },
+    {
+      "@id": "#metric-test-acc",
+      "@type": "PropertyValue",
+      "name": "test-acc",
+      "propertyID": "https://schema.org/Accuracy",
+      "value": 0.6670833333333333
+    },
+    {
+      "@id": "#metric-test-f1",
+      "@type": "PropertyValue",
+      "name": "test-f1",
+      "propertyID": "https://en.wikipedia.org/wiki/F-score",
+      "value": 0.4197656988286285
+    },
+    {
+      "@id": "#metric-test-prec",
+      "@type": "PropertyValue",
+      "name": "test-prec",
+      "propertyID": "http://edamontology.org/operation_3439",
+      "value": 0.5057061269718037
+    },
+    {
+      "@id": "#metric-test-rec",
+      "@type": "PropertyValue",
+      "name": "test-rec",
+      "propertyID": "https://en.wikipedia.org/wiki/Precision_and_recall",
+      "value": 0.592397527970238
+    },
+    {
+      "@id": "#metric-test-ll",
+      "@type": "PropertyValue",
+      "name": "test-ll",
+      "propertyID": "https://en.wikipedia.org/wiki/Cross-entropy",
+      "value": 0.6080362764945214
+    },
+    {
+      "@id": "#param-num-server-rounds",
+      "@type": "PropertyValue",
+      "name": "num-server-rounds",
+      "value": 10
+    },
+    {
+      "@id": "#param-local-epochs",
+      "@type": "PropertyValue",
+      "name": "local-epochs",
+      "value": 5
+    },
+    {
+      "@id": "#param-n-features",
+      "@type": "PropertyValue",
+      "name": "n-features",
+      "value": 313
+    },
+    {
+      "@id": "#param-threshold",
+      "@type": "PropertyValue",
+      "name": "threshold",
+      "value": 0.5
+    },
+    {
+      "@id": "#param-results-dir",
+      "@type": "PropertyValue",
+      "name": "results-dir",
+      "value": "/results"
+    },
+    {
+      "@id": "#param-author-name",
+      "@type": "PropertyValue",
+      "name": "author-name",
+      "value": "Thomas Rowlands"
+    },
+    {
+      "@id": "#param-author-orcid",
+      "@type": "PropertyValue",
+      "name": "author-orcid",
+      "value": "https://orcid.org/0000-0002-7912-4203"
+    },
+    {
+      "@id": "#param-author-affiliation",
+      "@type": "PropertyValue",
+      "name": "author-affiliation",
+      "value": "University of Nottingham"
+    },
+    {
+      "@id": "#fl-run",
+      "@type": "CreateAction",
+      "actionStatus": {
+        "@id": "http://schema.org/CompletedActionStatus"
+      },
+      "additionalProperty": [
+        {
+          "@id": "#metric-train-auc"
+        },
+        {
+          "@id": "#metric-train-f1"
+        },
+        {
+          "@id": "#metric-train-acc"
+        },
+        {
+          "@id": "#metric-test-auc"
+        },
+        {
+          "@id": "#metric-test-acc"
+        },
+        {
+          "@id": "#metric-test-f1"
+        },
+        {
+          "@id": "#metric-test-prec"
+        },
+        {
+          "@id": "#metric-test-rec"
+        },
+        {
+          "@id": "#metric-test-ll"
+        }
+      ],
+      "agent": {
+        "@id": "https://orcid.org/0000-0002-7912-4203"
+      },
+      "description": "Run using strategy HistoryFedAvg (prs_fed.strategy), 10 rounds.",
+      "endTime": "2026-08-10T18:47:20.755824+00:00",
+      "instrument": [
+        {
+          "@id": "#flower"
+        },
+        {
+          "@id": "#framework-numpy"
+        },
+        {
+          "@id": "#framework-pandas"
+        },
+        {
+          "@id": "#framework-scikit-learn"
+        },
+        {
+          "@id": "#framework-scipy"
+        },
+        {
+          "@id": "#fl-strategy"
+        }
+      ],
+      "name": "Federated learning training run",
+      "object": [
+        {
+          "@id": "#param-num-server-rounds"
+        },
+        {
+          "@id": "#param-local-epochs"
+        },
+        {
+          "@id": "#param-n-features"
+        },
+        {
+          "@id": "#param-threshold"
+        },
+        {
+          "@id": "#param-results-dir"
+        },
+        {
+          "@id": "#param-author-name"
+        },
+        {
+          "@id": "#param-author-orcid"
+        },
+        {
+          "@id": "#param-author-affiliation"
+        }
+      ],
+      "result": [
+        {
+          "@id": "metrics_log.json"
+        }
+      ],
+      "startTime": "2026-08-10T18:45:19.243499+00:00",
+      "contributor": {
+        "@id": "https://ror.org/01ee9ar58"
+      }
+    },
+    {
+      "@id": "https://www.geonames.org/10858713/university-of-nottingham.html",
+      "@type": "https://schema.org/GeoCoordinates",
+      "address": {
+        "@id": "https://www.geonames.org/10858713/university-of-nottingham.html",
+        "@type": "https://schema.org/PostalAddress",
+        "addressCountry": "UK",
+        "addressLocality": "University Park, Nottingham",
+        "addressRegion": "Nottinghamshire",
+        "postalCode": "NG7 2RD",
+        "streetAddress": "Biodiscovery Institute"
+      },
+      "latitude": "52.941686822260635",
+      "longitude": "-1.1871061808863315"
+    },
+    {
+      "@id": "https://ror.org/01ee9ar58",
+      "@type": "Organization",
+      "location": {
+        "@id": "https://www.geonames.org/10858713/university-of-nottingham.html"
+      },
+      "name": "University of Nottingham",
+      "url": "https://www.nottingham.ac.uk"
+    },
+    {
+      "@id": "https://orcid.org/0000-0002-0292-7972",
+      "@type": "Person",
+      "affiliation": {
+        "@id": "https://ror.org/01ee9ar58"
+      },
+      "name": "Tim Beck"
+    },
+    {
+      "@id": "https://ror.org/01ee9ar58#node-young",
+      "@type": "Organization",
+      "location": {
+        "@id": "https://www.geonames.org/10858713/university-of-nottingham.html"
+      },
+      "member": [
+        {
+          "@id": "https://orcid.org/0000-0002-7912-4203"
+        },
+        {
+          "@id": "https://orcid.org/0000-0002-0292-7972"
+        }
+      ],
+      "name": "University of Nottingham \u2014 Young Cohort TRE",
+      "parentOrganization": {
+        "@id": "https://ror.org/01ee9ar58"
+      }
+    },
+    {
+      "@id": "https://ror.org/01ee9ar58#node-old",
+      "@type": "Organization",
+      "location": {
+        "@id": "https://www.geonames.org/10858713/university-of-nottingham.html"
+      },
+      "member": [
+        {
+          "@id": "https://orcid.org/0000-0002-7912-4203"
+        },
+        {
+          "@id": "https://orcid.org/0000-0002-0292-7972"
+        }
+      ],
+      "name": "University of Nottingham \u2014 Older Cohort TRE",
+      "parentOrganization": {
+        "@id": "https://ror.org/01ee9ar58"
+      }
+    },
+    {
+      "@id": "https://ror.org/01ee9ar58#node-normal",
+      "@type": "Organization",
+      "location": {
+        "@id": "https://www.geonames.org/10858713/university-of-nottingham.html"
+      },
+      "member": [
+        {
+          "@id": "https://orcid.org/0000-0002-7912-4203"
+        },
+        {
+          "@id": "https://orcid.org/0000-0002-0292-7972"
+        }
+      ],
+      "name": "University of Nottingham \u2014 Reference Cohort TRE",
+      "parentOrganization": {
+        "@id": "https://ror.org/01ee9ar58"
+      }
+    }
+  ]
+}

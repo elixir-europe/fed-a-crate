@@ -1,0 +1,14 @@
+{
+  "federation": {},
+  "run_config": {
+    "num-server-rounds": 10,
+    "local-epochs": 5,
+    "n-features": 313,
+    "threshold": 0.5,
+    "results-dir": "/results",
+    "author-name": "Thomas Rowlands",
+    "author-orcid": "https://orcid.org/0000-0002-7912-4203",
+    "author-affiliation": "University of Nottingham"
+  },
+  "per_round": {}
+}

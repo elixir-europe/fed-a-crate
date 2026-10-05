@@ -1,0 +1,95 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name        = "prs-fed"
+version     = "1.0.0"
+description = "Federated PRS case/control prediction across 3 nodes (Flower Message API)"
+license     = "Apache-2.0"
+dependencies = [
+    "flwr>=1.29.0",
+    "flwrcrate>=0.4.0",
+    "numpy>=1.26",
+    "pandas>=2.0",
+    "rocrate>=0.15.0",
+    "scikit-learn>=1.3",
+    "scipy>=1.11",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["prs_fed"]
+
+# ── Flower App configuration ──────────────────────────────────────────────────
+# The [tool.flwr.app] block tells the Flower runtime where to find this app's
+# ServerApp and ClientApp objects. The paths are `module:variable_name`.
+[tool.flwr.app]
+publisher = "prs-federation"
+
+[tool.flwr.app.components]
+serverapp = "prs_fed.server_app:app"
+clientapp = "prs_fed.client_app:app"
+
+# Default runtime config — overridable via `flwr run --run-config "key=value"`
+# or via [tool.flwr.app.config.<run-name>] sections.
+[tool.flwr.app.config]
+num-server-rounds = 10
+local-epochs      = 5
+n-features        = 313
+threshold         = 0.5
+results-dir       = "/results"
+# Author of the provenance crate. Fill these in (or override at run time with
+# `flwr run . local-deployment --run-config "author-name='Jane Doe'"`).
+author-name        = "Thomas Rowlands"
+author-orcid       = "https://orcid.org/0000-0002-7912-4203"
+author-affiliation = "University of Nottingham"
+
+# ── Federation endpoints ──────────────────────────────────────────────────────
+# These describe how `flwr run` should reach a running SuperLink to submit
+# this app as a job. Users can pick one with `flwr run prs-fed <federation>`.
+
+# Declaring a default is required by the Flower config migration step, even
+# when you pass a federation name explicitly on the command line.
+
+#######################################################################
+# CONFIGURATION MIGRATION NOTICE:
+#
+# What was previously called "federation config" for SuperLink
+# connections in pyproject.toml has been renamed and moved.
+#
+# These settings are now **SuperLink connection configuration**
+# and are defined in the Flower configuration file.
+#
+# The entries below are commented out intentionally and are kept
+# only as a migration reference.
+#
+# Docs: https://flower.ai/docs/framework/ref-flower-configuration.html
+#######################################################################
+
+# [tool.flwr.federations]
+# default = "local-deployment"
+
+# # Local Docker Compose deployment (the default in compose.yml).
+# [tool.flwr.federations.local-deployment]
+# address  = "127.0.0.1:9093"
+# insecure = true
+
+# # Same deployment but with TLS enabled (uses certs from ./certs/).
+# [tool.flwr.federations.local-deployment-tls]
+# address           = "127.0.0.1:9093"
+# root-certificates = "certs/ca.crt"
+
+# # ── flwrCrate: semantic identifiers for metrics ───────────────────────────────
+# # Maps our metric names to ontology URIs so the emitted RO-Crate attaches a
+# # propertyID to each. Unmapped metrics still appear as plain PropertyValues.
+# # Both train-* and test-* are emitted by the run, so both are mapped.
+[tool.flwrcrate.metric-uris]
+test-acc  = "https://schema.org/Accuracy"
+test-auc  = "http://edamontology.org/data_2125"
+test-f1   = "https://en.wikipedia.org/wiki/F-score"
+test-prec = "http://edamontology.org/operation_3439"
+test-rec  = "https://en.wikipedia.org/wiki/Precision_and_recall"
+test-ll   = "https://en.wikipedia.org/wiki/Cross-entropy"
+train-acc = "https://schema.org/Accuracy"
+train-auc = "http://edamontology.org/data_2125"
+train-f1  = "https://en.wikipedia.org/wiki/F-score"

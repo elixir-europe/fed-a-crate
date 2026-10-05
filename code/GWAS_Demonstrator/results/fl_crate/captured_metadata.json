@@ -1,0 +1,71 @@
+{
+  "app_name": "Federated PRS case/control classification across 3 nodes",
+  "run_timing": {
+    "start_time": "2026-08-10T19:05:10.821604+00:00",
+    "end_time": null
+  },
+  "environment_config": {
+    "num-server-rounds": 10,
+    "local-epochs": 5,
+    "n-features": 313,
+    "threshold": 0.5,
+    "results-dir": "/results",
+    "author-name": "Thomas Rowlands",
+    "author-orcid": "https://orcid.org/0000-0002-7912-4203",
+    "author-affiliation": "University of Nottingham"
+  },
+  "federation": {},
+  "flower": {
+    "version": "1.29.0"
+  },
+  "frameworks": [
+    {
+      "package": "numpy",
+      "name": "numpy",
+      "homepage": null,
+      "declared": ">=1.26",
+      "installed_version": "2.4.4",
+      "known_framework": false
+    },
+    {
+      "package": "pandas",
+      "name": "pandas",
+      "homepage": null,
+      "declared": ">=2.0",
+      "installed_version": "3.0.5",
+      "known_framework": false
+    },
+    {
+      "package": "scikit-learn",
+      "name": "scikit-learn",
+      "homepage": "https://scikit-learn.org/",
+      "declared": ">=1.3",
+      "installed_version": "1.9.0",
+      "known_framework": true
+    },
+    {
+      "package": "scipy",
+      "name": "scipy",
+      "homepage": null,
+      "declared": ">=1.11",
+      "installed_version": "1.18.0",
+      "known_framework": false
+    }
+  ],
+  "strategy": {
+    "class_name": "HistoryFedAvg",
+    "module": "prs_fed.strategy",
+    "attributes": {
+      "arrayrecord_key": "arrays",
+      "configrecord_key": "config",
+      "fraction_evaluate": 1.0,
+      "fraction_train": 1.0,
+      "min_available_nodes": 3,
+      "min_evaluate_nodes": 3,
+      "min_train_nodes": 3,
+      "weighted_by_key": "num-examples"
+    }
+  },
+  "final_metrics": {},
+  "metrics_log_file": "metrics_log.json"
+}

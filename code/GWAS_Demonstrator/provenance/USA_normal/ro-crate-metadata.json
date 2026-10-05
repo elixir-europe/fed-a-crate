@@ -1,0 +1,82 @@
+{
+    "@context": "https://w3id.org/ro/crate/1.2/context",
+    "@graph": [
+        {
+            "@id": "./",
+            "@type": "Dataset",
+            "about": {
+                "@id": "https://ror.org/01ee9ar58#node-normal"
+            },
+            "datePublished": "2026-06-28T17:50:10+00:00"
+        },
+        {
+            "@id": "ro-crate-metadata.json",
+            "@type": "CreativeWork",
+            "about": {
+                "@id": "./"
+            },
+            "conformsTo": {
+                "@id": "https://w3id.org/ro/crate/1.2"
+            }
+        },
+        {
+            "@id": "https://www.geonames.org/10858713/university-of-nottingham.html",
+            "@type": "https://schema.org/GeoCoordinates",
+            "address": {
+                "@id": "https://www.geonames.org/10858713/university-of-nottingham.html",
+                "@type": "https://schema.org/PostalAddress",
+                "addressCountry": "UK",
+                "addressLocality": "University Park, Nottingham",
+                "addressRegion": "Nottinghamshire",
+                "postalCode": "NG7 2RD",
+                "streetAddress": "Biodiscovery Institute"
+            },
+            "latitude": "52.941686822260635",
+            "longitude": "-1.1871061808863315"
+        },
+        {
+            "@id": "https://ror.org/01ee9ar58",
+            "@type": "Organization",
+            "location": {
+                "@id": "https://www.geonames.org/10858713/university-of-nottingham.html"
+            },
+            "name": "University of Nottingham",
+            "url": "https://www.nottingham.ac.uk"
+        },
+        {
+            "@id": "https://orcid.org/0000-0002-7912-4203",
+            "@type": "Person",
+            "affiliation": {
+                "@id": "https://ror.org/01ee9ar58"
+            },
+            "name": "Thomas Rowlands"
+        },
+        {
+            "@id": "https://orcid.org/0000-0002-0292-7972",
+            "@type": "Person",
+            "affiliation": {
+                "@id": "https://ror.org/01ee9ar58"
+            },
+            "name": "Tim Beck"
+        },
+        {
+            "@id": "https://ror.org/01ee9ar58#node-normal",
+            "@type": "Organization",
+            "location": {
+                "@id": "https://www.geonames.org/10858713/university-of-nottingham.html"
+            },
+            "member": [
+                {
+                    "@id": "https://orcid.org/0000-0002-7912-4203"
+                },
+                {
+                    "@id": "https://orcid.org/0000-0002-0292-7972"
+                }
+            ],
+            "name": "University of Nottingham — Reference Cohort TRE",
+            "parentOrganization": {
+                "@id": "https://ror.org/01ee9ar58"
+            }
+        }
+    ]
+}

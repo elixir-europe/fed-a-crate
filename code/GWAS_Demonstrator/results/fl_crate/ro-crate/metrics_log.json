@@ -1,0 +1,165 @@
+{
+  "federation": {},
+  "run_config": {
+    "num-server-rounds": 10,
+    "local-epochs": 5,
+    "n-features": 313,
+    "threshold": 0.5,
+    "results-dir": "/results",
+    "author-name": "Thomas Rowlands",
+    "author-orcid": "https://orcid.org/0000-0002-7912-4203",
+    "author-affiliation": "University of Nottingham"
+  },
+  "per_round": {
+    "1": {
+      "train_clientapp": {
+        "train-auc": 0.7460147337006036,
+        "train-f1": 0.40412478340535873,
+        "train-acc": 0.6089791666666666
+      },
+      "evaluate_clientapp": {
+        "test-auc": 0.627140446197139,
+        "test-acc": 0.6355,
+        "test-f1": 0.4075474888109655,
+        "test-prec": 0.5055533204523068,
+        "test-rec": 0.5933333254478775,
+        "test-ll": 0.6366816302067371
+      }
+    },
+    "2": {
+      "train_clientapp": {
+        "train-auc": 0.746263441797766,
+        "train-f1": 0.41417694053408155,
+        "train-acc": 0.6327430555555555
+      },
+      "evaluate_clientapp": {
+        "test-auc": 0.626256863197751,
+        "test-acc": 0.6594722222222222,
+        "test-f1": 0.4168992825268463,
+        "test-prec": 0.5057018349499622,
+        "test-rec": 0.5924776435028722,
+        "test-ll": 0.6168644383594486
+      }
+    },
+    "3": {
+      "train_clientapp": {
+        "train-auc": 0.7460269683468885,
+        "train-f1": 0.41669433815217244,
+        "train-acc": 0.6390555555555555
+      },
+      "evaluate_clientapp": {
+        "test-auc": 0.6259089630668306,
+        "test-acc": 0.6648611111111111,
+        "test-f1": 0.4189593908206043,
+        "test-prec": 0.5057303140794513,
+        "test-rec": 0.5923599260534702,
+        "test-ll": 0.6108263001414688
+      }
+    },
+    "4": {
+      "train_clientapp": {
+        "train-auc": 0.745943706911079,
+        "train-f1": 0.4175337371181893,
+        "train-acc": 0.6410138888888889
+      },
+      "evaluate_clientapp": {
+        "test-auc": 0.6258458636193217,
+        "test-acc": 0.6663611111111111,
+        "test-f1": 0.41953847670126804,
+        "test-prec": 0.5057420268637083,
+        "test-rec": 0.5925773910200846,
+        "test-ll": 0.60893557150462
+      }
+    },
+    "5": {
+      "train_clientapp": {
+        "train-auc": 0.7459176281670674,
+        "train-f1": 0.4177396839689308,
+        "train-acc": 0.6416111111111111
+      },
+      "evaluate_clientapp": {
+        "test-auc": 0.6258257122949555,
+        "test-acc": 0.6668055555555554,
+        "test-f1": 0.4197219648161665,
+        "test-prec": 0.5057568409438526,
+        "test-rec": 0.5928022399478605,
+        "test-ll": 0.608329141621079
+      }
+    },
+    "6": {
+      "train_clientapp": {
+        "train-auc": 0.7459064035985151,
+        "train-f1": 0.4178635381861608,
+        "train-acc": 0.6418819444444444
+      },
+      "evaluate_clientapp": {
+        "test-auc": 0.6258173135761724,
+        "test-acc": 0.6669999999999999,
+        "test-f1": 0.41972867092976346,
+        "test-prec": 0.5057014131317443,
+        "test-rec": 0.5923550242504318,
+        "test-ll": 0.6081316998145914
+      }
+    },
+    "7": {
+      "train_clientapp": {
+        "train-auc": 0.7459028237274105,
+        "train-f1": 0.41790141107555434,
+        "train-acc": 0.6419652777777777
+      },
+      "evaluate_clientapp": {
+        "test-auc": 0.6258159822894455,
+        "test-acc": 0.6670555555555555,
+        "test-f1": 0.4197545279062047,
+        "test-prec": 0.5057054013033814,
+        "test-rec": 0.5923835094096639,
+        "test-ll": 0.6080669447989908
+      }
+    },
+    "8": {
+      "train_clientapp": {
+        "train-auc": 0.7459013579638609,
+        "train-f1": 0.4178845083479902,
+        "train-acc": 0.6419652777777778
+      },
+      "evaluate_clientapp": {
+        "test-auc": 0.6258176617292153,
+        "test-acc": 0.6670833333333333,
+        "test-f1": 0.4197656988286286,
+        "test-prec": 0.5057061269718037,
+        "test-rec": 0.592397527970238,
+        "test-ll": 0.608045628605391
+      }
+    },
+    "9": {
+      "train_clientapp": {
+        "train-auc": 0.745900932943898,
+        "train-f1": 0.4178908459235519,
+        "train-acc": 0.6419791666666667
+      },
+      "evaluate_clientapp": {
+        "test-auc": 0.6258168767347436,
+        "test-acc": 0.6670833333333333,
+        "test-f1": 0.41976569882862846,
+        "test-prec": 0.5057061269718037,
+        "test-rec": 0.592397527970238,
+        "test-ll": 0.6080385979852514
+      }
+    },
+    "10": {
+      "train_clientapp": {
+        "train-auc": 0.7459007377316473,
+        "train-f1": 0.4178875067909491,
+        "train-acc": 0.6419722222222222
+      },
+      "evaluate_clientapp": {
+        "test-auc": 0.6258181073552811,
+        "test-acc": 0.6670833333333333,
+        "test-f1": 0.4197656988286285,
+        "test-prec": 0.5057061269718037,
+        "test-rec": 0.592397527970238,
+        "test-ll": 0.6080362764945214
+      }
+    }
+  }
+}
