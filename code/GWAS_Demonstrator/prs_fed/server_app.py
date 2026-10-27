@@ -130,7 +130,7 @@ def main(grid: Grid, context: Context) -> None:
         context, strategy,
         output_dir     = crate_out,                       # absolute path under results_dir
         pyproject_path = pyproject_path or "pyproject.toml",
-        app_name       = "Federated PRS case/control classification across 3 nodes",
+        app_name       = "GWAS Demonstrator: PRS Federation",
         author         = _build_author(cfg),
         license        = "https://github.com/elixir-europe/fed-a-crate?tab=MIT-1-ov-file",
     ) as tracker:
@@ -149,19 +149,19 @@ def main(grid: Grid, context: Context) -> None:
     # Fold each node's RO-Crate (institute and location) into the run-crate
     # as contributor organisations on the run action, producing a single
     # self-contained provenance record.
-    run_crate_path = os.path.join(crate_out, "ro-crate", "ro-crate-metadata.json")
-    merge_status = merge_node_crates_into_run_crate(
-        run_crate_path = run_crate_path,
-        node_provenance = strategy._provenance,
-    )
-    if merge_status["written"]:
-        merged = [t["cohort"] for t in merge_status["merged_nodes"]]
-        print(f"  [provenance] Merged node crates into run-crate: {merged}")
-    if merge_status["skipped_nodes"]:
-        skipped = [(t["cohort"], t["reason"]) for t in merge_status["skipped_nodes"]]
-        print(f"  [provenance] Skipped: {skipped}")
-    for w in merge_status["warnings"]:
-        print(f"  [provenance] WARNING: {w}")
+    # run_crate_path = os.path.join(crate_out, "ro-crate", "ro-crate-metadata.json")
+    # merge_status = merge_node_crates_into_run_crate(
+    #     run_crate_path = run_crate_path,
+    #     node_provenance = strategy._provenance,
+    # )
+    # if merge_status["written"]:
+    #     merged = [t["cohort"] for t in merge_status["merged_nodes"]]
+    #     print(f"  [provenance] Merged node crates into run-crate: {merged}")
+    # if merge_status["skipped_nodes"]:
+    #     skipped = [(t["cohort"], t["reason"]) for t in merge_status["skipped_nodes"]]
+    #     print(f"  [provenance] Skipped: {skipped}")
+    # for w in merge_status["warnings"]:
+    #     print(f"  [provenance] WARNING: {w}")
 
     # ── Persist artefacts ─────────────────────────────────────────────────────
     # result.arrays holds the final aggregated parameters from the last round.
