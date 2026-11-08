@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>SynthGWAS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="index-body">
+    <header class="header">
+    <nav class="main-nav">
+        <div class="logo">
+            <i class="fas fa-dna"></i>
+            <a href="tutorial.html" class="logo-title">SynthGWAS</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Cohort Generation</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="tutorial.html" class="active">Tutorial</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <div id="tutorial" class="tutorial">
+        <article class="tutorial-content">
+            <!-- Title -->
+            <h2 id="getting-started">
+                Getting Started Guide <span class="version-tag">v1.0</span>
+            </h2>
+
+            <!-- Step 1 -->
+            <section class="tutorial-step">
+                <h3 id="step-1">1. Define Population-Specific Parameters</h3>
+                <p>Begin by configuring the parameters of the cohort you want to simulate:</p>
+                <ul>
+                    <li>
+                        <strong>Country:</strong> Select the country whose age distribution will be used
+                        for generating study entry ages. <em>Current version supports China (EAS), India (SAS), Portugal (EUR), Spain (EUR), United States of America (AMR), United States of America (EUR), and Zimbabwe (AFR).</em>
+                    </li>
+                    <li>
+                        <strong>Gender:</strong> Choose Male or Female.
+                    </li>
+                    <li>
+                        <strong>Age of Entry Range:</strong> Set lower and upper bounds for entry age.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Step 3 -->
+            <section class="tutorial-step">
+                <h3 id="step-2">2. Define Cohort-Specific Parameters</h3>
+                <p>Depending on the cohort type to simulate, specify the appropriate parameters:</p>
+                <li>
+                    <strong>Disease:</strong> Choose a disease with an associated Polygenic Score identifier from the
+                    <a href="https://www.pgscatalog.org/" target="_blank" rel="noopener">PGS Catalog</a>,
+                    such as <code>PGS000004</code> (or simply <code>4</code>).
+                    <em>Current version supports Breast Cancer (PGS000004), Epithelial Ovarian Cancer (PGS003394), Kidney Cancer (PGS004908), Lung Cancer (PGS000740), Prostate Cancer (PGS003765).</em>
+                </li>
+
+                <ul>
+                    <li>
+                        <strong>Prospective Cohort</strong>
+                        <ul>
+                            <li><strong>Total Number of Profiles:</strong> Number of profiles to generate.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Retrospective Cohort</strong>
+                        <ul>
+                            <li><strong>Total Number of Profiles:</strong> Number of cases to generate.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <li>
+                    <strong>Follow-up Interval:</strong> Set the minimum and maximum number of years
+                    each profile will be followed after study entry.
+                </li>
+
+                <li>
+                    <strong>Create Retrospective Cohort:</strong> Toggle whether the simulated cohort should be <strong>Prospective</strong> or <strong>Retrospective</strong>.
+                </li>
+
+                <li>
+                    <strong>Number of Controls per Case:</strong> This parameter appears when <strong>Create Retrospective Cohort</strong> is enabled and specifies the integer number of controls to be matched to each case defined in <strong>Total Number of Profiles</strong>.
+                </li>
+
+            </section>
+            <!-- Step 3 -->
+            <section class="tutorial-step">
+                <h3 id="step-3">3. Generate Data</h3>
+                <p>
+                    Click <strong>Generate Data</strong> to begin the synthetic data generation process.
+                    This may take a few moments depending on dataset size.
+                </p>
+                <ol>
+                    <li>The platform retrieves the SNP information required for the simulation.</li>
+                    <li>It generates 100,000 Polygenic Risk Scores (PRS) from the SNP data.</li>
+                    <li>
+                        It fits a Cox Proportional Hazards model to estimate disease incidence parameters,
+                        using real-life incidence rates as the target. Parameters are optimized (Nelder–Mead)
+                        to minimize the difference between predicted and observed cumulative incidence.
+                    </li>
+                    <li>
+                        Using the approximated parameters, synthetic profiles are generated (age and other attributes)
+                        aligned with the target incidence pattern.
+                    </li>
+                    <li>
+                        Finally, the system computes the predicted cumulative incidence curve, the observed cumulative
+                        incidence curve, and a Kaplan–Meier survival curve based on the synthetic cohort.
+                    </li>
+                </ol>
+            </section>
+
+            <!-- Step 5 -->
+            <section class="tutorial-step">
+                <h3 id="step-5">5. View Statistics and Download Results</h3>
+                <p>After generation completes, you can:</p>
+                <ul>
+                    <li>
+                        <strong>Inspect summary statistics:</strong>
+                        <ul>
+                            <li>
+                                <strong>Observed vs. Predicted Incidence Rate:</strong> Compare real-world data
+                                with model estimates from the Cox PH model.
+                            </li>
+                            <li>
+                                <strong>Kaplan–Meier Curve:</strong> A step-function survival estimate
+                                showing the proportion event-free over time.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Download outputs:</strong>
+                        <ul>
+                            <li><strong>Prospective Cohort:</strong> All generated profiles (CSV or VCF).</li>
+                            <li><strong>Retrospective Cohort:</strong> Matched case–control pairs (CSV or VCF).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Methodology -->
+            <h2 id="methodology">Methodology</h2>
+
+            <section class="tutorial-step">
+                <h3 id="params">Parameters</h3>
+                <ul>
+                    <li>
+                        <strong>Country:</strong> Countries are retrieved from the
+                        <a href="https://www.worldbank.org/" target="_blank" rel="noopener">World Bank</a>
+                        to determine available demographic data.
+                    </li>
+                    <li>
+                        <strong>PGS ID:</strong> Score files are fetched from the
+                        <a href="https://ftp.ebi.ac.uk/pub/databases/spot/pgs/scores" target="_blank" rel="noopener">PGS Catalog</a>
+                        and parsed to extract variant IDs, allele frequencies, and effect sizes.
+                    </li>
+                    <li>
+                        <strong>Age of Entry:</strong> Age distributions (by sex) for the selected country are retrieved from the World Bank.
+                        Each age bin represents the proportion of the population and is used for realistic sampling.
+                        <ul>
+                            <li><strong>Male / Female:</strong> Percentages across bins are normalized to 100% and scaled by the selected sex’s population.</li>
+                            <li><strong>Both:</strong> The total number of profiles is split by the country’s sex distribution, then age bins are allocated per sex as above.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Follow-up Period:</strong> For each profile, a duration is sampled uniformly from the specified interval.
+                    </li>
+                </ul>
+            </section>
+
+            <section class="tutorial-step">
+                <h3 id="prospective-method">Prospective Cohort Generation</h3>
+                <p>
+                    For a detailed explanation of how prospective cohorts are simulated using incidence rates, PGS data,
+                    and age-based risk models, see
+                    <a href="https://observablehq.com/d/26478eba9074ea56" target="_blank" rel="noopener">
+                        Prospective Cohort Methodology
+                    </a>.
+                </p>
+            </section>
+
+            <section class="tutorial-step">
+                <h3 id="retrospective-method">Retrospective Cohort Generation</h3>
+                <p>
+                    In retrospective simulation, the system first generates the requested number of <em>cases</em>—profiles
+                    that develop the disease within follow-up according to age, PRS, and population incidence.
+                </p>
+                <p>
+                    Each case is then matched with one or more <em>controls</em> who did not develop the disease during the same
+                    follow-up interval. Matching is based on age at entry and sex; controls are drawn from the remaining pool.
+                </p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>
