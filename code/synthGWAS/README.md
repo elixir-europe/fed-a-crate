@@ -21,6 +21,8 @@ Everything runs client-side in your browser. There is no backend and nothing to 
 - [Running locally](#running-locally)
 - [Project structure](#project-structure)
 - [Browser requirements and troubleshooting](#browser-requirements-and-troubleshooting)
+- [Authors](#authors)
+- [License](#license)
 
 ---
 
@@ -216,3 +218,18 @@ synthGWAS/
 - **Generation is slow or fails**: large cohorts and scores with many SNPs require many Ensembl requests. Try fewer profiles, or try again later if Ensembl is rate-limiting.
 - **Results page is empty**: generate a cohort first. If it still fails, clear the site data in your browser (this removes the stored cohort) and generate again.
 - **Private/incognito mode**: some browsers restrict IndexedDB storage, which can prevent results from being saved.
+
+---
+
+## Authors
+
+- Rodrigo Liu <rsl1710@outlook.pt>
+- Jeya Balasubramanian <jeya.balasubramanian@nih.gov>
+- Jonas De Almeida <jonas.dealmeida@nih.gov>
+- Ana Teresa Freitas <ana.freitas@tecnico.ulisboa.pt>
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
