@@ -6,7 +6,8 @@ build-backend = "hatchling.build"
 name        = "prs-fed"
 version     = "1.0.0"
 description = "Federated PRS case/control prediction across 3 nodes (Flower Message API)"
-license     = "MIT"
+license     = "Apache-2.0"
+requires-python = ">=3.11"
 dependencies = [
     "flwr>=1.29.0",
     "flwrcrate>=0.4.0",
